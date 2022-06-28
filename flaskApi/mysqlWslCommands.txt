@@ -1,0 +1,6 @@
+sudo service mysql start
+ sudo service mysql stop
+ sudo mysql
+ Read more at the Flask-MySQLdb’s docs.
+ free --mega
+ free --giga
