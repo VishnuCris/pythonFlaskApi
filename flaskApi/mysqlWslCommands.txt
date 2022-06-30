@@ -4,3 +4,7 @@ sudo service mysql start
  Read more at the Flask-MySQLdb’s docs.
  free --mega
  free --giga
+
+ $ export FLASK_APP=main.py
+$ export FLASK_ENV=development
+$ flask run
