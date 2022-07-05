@@ -6,4 +6,3 @@ app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'flaskApi'
 app.config['MYSQL_HOST'] = 'localhost'
 mysql = MySQL(app)
-# mysql.init_app(app)

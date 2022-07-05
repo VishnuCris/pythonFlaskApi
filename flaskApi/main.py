@@ -5,7 +5,7 @@ from flask import jsonify
 from flask import flash, request
 from personsSql import *
 from Sqls import personsSql
-
+import requests
 
 @app.route('/')
 def emp():
@@ -14,11 +14,15 @@ def emp():
         cursor = conn.cursor()
         cursor.execute(personsSql.personSql)
         empRows = cursor.fetchall()
+        session = requests.Session()
+        print(session.cookies.get_dict())
         cursor.execute(personsSql.personColSql)
         colRows = cursor.fetchall()
         response1 = empRows
         response2 = colRows
         response = jsonify({'response1':response1,'response2':response2})
+        response.headers["Access-Control-Allow-Origin"] = 'http://127.0.0.1:8001'
+        response.headers['Access-Control-Allow-Credentials']='true'
         response.status_code = 200
         return response
     except Exception as e:
@@ -27,6 +31,7 @@ def emp():
 @app.route('/postPrsn',methods=['GET','POST'])
 def postPrsn():
     try:
+        print('inside')
         data = request.get_json()
         conn = mysql.connection
         cursor = conn.cursor()
