@@ -15,7 +15,7 @@ def emp():
         cursor.execute(personsSql.personSql)
         empRows = cursor.fetchall()
         session = requests.Session()
-        print(session.cookies.get_dict())
+        # print(session.cookies.get_dict())
         cursor.execute(personsSql.personColSql)
         colRows = cursor.fetchall()
         response1 = empRows
@@ -31,7 +31,7 @@ def emp():
 @app.route('/postPrsn',methods=['GET','POST'])
 def postPrsn():
     try:
-        print('inside')
+        # print('inside')
         data = request.get_json()
         conn = mysql.connection
         cursor = conn.cursor()
