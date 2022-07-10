@@ -21,7 +21,7 @@ def emp():
         response1 = empRows
         response2 = colRows
         response = jsonify({'response1':response1,'response2':response2})
-        response.headers["Access-Control-Allow-Origin"] = 'http://127.0.0.1:8001'
+        response.headers["Access-Control-Allow-Origin"] = 'http://127.0.0.1:8000'
         response.headers['Access-Control-Allow-Credentials']='true'
         response.status_code = 200
         return response
@@ -31,14 +31,16 @@ def emp():
 @app.route('/postPrsn',methods=['GET','POST'])
 def postPrsn():
     try:
-        # print('inside')
+        print('inside')
         data = request.get_json()
+        print(data)
+        formData = data['data']
         conn = mysql.connection
         cursor = conn.cursor()
-        insertSqls = personsSql.insertSql.format(data['personId'],'"'+data['LastName']+'"','"'+data['FirstName']+'"','"'+data['Address']+'"','"'+data['City']+'"')
+        insertSqls = personsSql.insertSql.format(formData['personId'],'"'+formData['LastName']+'"','"'+formData['FirstName']+'"','"'+formData['Address']+'"','"'+formData['City']+'"')
         cursor.execute(insertSqls)
         conn.commit()
-        response = jsonify(data)
+        response = jsonify(formData)
         response.headers.add("Access-contol-Allow-orgin","*")
         return response
     except Exception as e:
@@ -46,4 +48,4 @@ def postPrsn():
         pass    
 
 if __name__ == "__main__":
-    app.run()         
+    app.run(debug=True)         
